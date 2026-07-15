@@ -79,8 +79,14 @@
   select, input[type=text], input[type=date], input[type=number], input[type=password], textarea{
     width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:8px;
     font-size:14px;font-family:inherit;background:#fff;color:var(--ink);
+    height:40px;box-sizing:border-box;
   }
-  textarea{resize:vertical;min-height:56px;}
+  /* iOSはinput[type=date]を独自の見た目で描画してしまい、他の項目と枠がズレて見えるため上書き */
+  input[type=date]{
+    -webkit-appearance:none;appearance:none;
+    text-align:left;line-height:1.2;
+  }
+  textarea{resize:vertical;min-height:56px;height:auto;}
   button.primary{
     background:var(--ember);color:#fff;border:none;border-radius:8px;
     padding:10px 20px;font-weight:800;font-size:13.5px;cursor:pointer;font-family:inherit;
