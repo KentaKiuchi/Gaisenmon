@@ -855,6 +855,7 @@ function goalRow(g){
 }
 
 function renderGoals(){
+  if(!Array.isArray(state.goals)) state.goals = [];
   const wrap = document.createElement("div");
   wrap.appendChild(titleEl());
   const card = document.createElement("div");
@@ -987,6 +988,7 @@ function logRow(l){
 }
 
 function renderLogs(){
+  if(!Array.isArray(state.logs)) state.logs = [];
   const wrap = document.createElement("div");
   wrap.appendChild(titleEl());
   const card = document.createElement("div");
@@ -1071,6 +1073,11 @@ onValue(stateRef, (snapshot)=>{
     return;
   }
   state = val;
+  // Firebase Realtime Database は空配列([])を保存できず、キーごと消えてしまう。
+  // 目標・教育ログを全部削除すると undefined になり、画面が真っ白になっていたのを修正。
+  if(!Array.isArray(state.staff)) state.staff = [];
+  if(!Array.isArray(state.goals)) state.goals = [];
+  if(!Array.isArray(state.logs)) state.logs = [];
   const migrated = applyTenureMigration(state);
   firstLoadDone = true;
   render();
