@@ -81,7 +81,17 @@
     font-size:14px;font-family:inherit;background:#fff;color:var(--ink);
     height:40px;box-sizing:border-box;
   }
-  /* iOSはinput[type=date]を独自の見た目で描画してしまい、他の項目と枠がズレて見えるため上書き */
+  /* iOSのselectはOS側が内部余白を持っていて、CSSでwidthを揃えても実際の見た目幅がズレる。
+     ネイティブの見た目を消して、矢印アイコンを自前で描画することで完全に揃える。 */
+  select{
+    -webkit-appearance:none;-moz-appearance:none;appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 20 20'><path d='M5 8l5 5 5-5' fill='none' stroke='%238A7F72' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 12px center;
+    background-size:13px;
+    padding-right:32px;
+  }
+  /* iOSはinput[type=date]も独自の見た目(中央寄せ等)で描画するため上書き */
   input[type=date]{
     -webkit-appearance:none;appearance:none;
     text-align:left;line-height:1.2;
