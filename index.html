@@ -1358,10 +1358,10 @@ function getLoginCode(){
 }
 function resolveCurrentPersonName(){
   if(!state) return null;
-  const code = getLoginCode();
-  const staffMatch = (state.staff||[]).find(s=>s.loginCode===code);
+  const code = String(getLoginCode());
+  const staffMatch = (state.staff||[]).find(s=>String(s.loginCode)===code);
   if(staffMatch) return staffMatch.name;
-  const userMatch = (state.loginUsers||[]).find(u=>u.loginCode===code);
+  const userMatch = (state.loginUsers||[]).find(u=>String(u.loginCode)===code);
   if(userMatch) return userMatch.name;
   return null;
 }
